@@ -1,0 +1,44 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+h1=. Rosette Analysis for Elasticsearch
+
+h2. Introduction
+
+The Rosette Analysis plugin integrates "Basis Technology's":http://www.basistech.com/ Lucene analysis modules into elasticsearch.  These modules encapsulate the "Rosette Linguistics Platform":http://www.basistech.com/text-analytics/rosette/ (Rosette). For more information, see __Rosette Linguistics Platform Application Developer's Guide: Lucene/Solr Connector__. 
+
+h2. Compatibility
+
+The following table shows the versions of elasticsearch and Rosette used to build this plugin. 
+
+|_. Rosette Analysis Plugin           |_.  Elasticsearch   |_.  Rosette   |
+| 0.9.0                           | 0.90.3             | 7.9.1      |
+
+h2. Installation
+
+To install the plugin, simply run:
+
+bc. <es.home>/bin/plugin --install analysis-rosette --url http://download.basistech.com/httpFDL/elasticsearch-analysis-rosette/latest
+
+where <code>es.home</code> is the root of your elasticsearch installation.
+
+Using the plugin requires a licensed copy of "Rosette.":http://www.basistech.com/text-analytics/rosette/ The plugin needs to know where to find the Rosette binaries. This is accomplished by creating the file <code><es.home>/config/bt/analysis-rosette-config.yml</code> that contains the single line <code>bt.root: <rosette.home></code>, e.g. <code>bt.root: /opt/rlp_7.9</code>.
+
+h2. Build Dependencies
+
+If you choose to build the plugin from source, note the following dependencies, which are not publicly available.  These are found in the Rosette SDK:
+
+    * btrlp.jar
+    * btutil.jar
+    * common-20.jar
+    * rlp-lucene-solr-43-7.9.jar
+    * rlp-lucene-extra-7.9.jar
+
+You can install these into your local maven repository by using the script _mvn-install-rosette-artifacts.sh_ as follows:
+
+bc. sh mvn-install-rosette-artifacts.sh <rosette.home>
+
+Once these dependencies are present in your maven repository, you can build the plugin as shown:
+
+bc. mvn -Dbt.root=<rosette.home> package
+
+Note that <code>-Dbt.root=<rosette.home></code> is required by the unit tests.
