@@ -22,16 +22,16 @@ VER=20
 FILE=$(find $BT_ROOT -name btcommon-$VER.jar)
 mvn install:install-file -DgroupId=$GROUP_ID -DartifactId=common -Dversion=$VER -Dfile=$FILE -Dpackaging=jar -DgeneratePom=true
 
-VER=7.9.1
+VER=7.10.1
 FILE=$(find $BT_ROOT -name btrlp.jar)
 mvn install:install-file -DgroupId=$GROUP_ID -DartifactId=rlp -Dversion=$VER -Dfile=$FILE -Dpackaging=jar -DgeneratePom=true
 
 FILE=$(find $BT_ROOT -name btutil.jar)
 mvn install:install-file -DgroupId=$GROUP_ID -DartifactId=utilities -Dversion=$VER -Dfile=$FILE -Dpackaging=jar -DgeneratePom=true
 
-FILE=$(find $BT_ROOT -name btrlplucene-L43S43-7.9.jar)
+FILE=$(find $BT_ROOT -name btrlplucene-L43S43-7.10.jar)
 GROUP_ID=$GROUP_ID.rlp.lucene
 mvn install:install-file -DgroupId=$GROUP_ID -DartifactId=rlp-lucene-solr-43 -Dversion=$VER -Dfile=$FILE -Dpackaging=jar -DgeneratePom=true
 
-FILE=$(find $BT_ROOT -name btrlpextra-7.9.jar)
+FILE=$(find $BT_ROOT -name btrlpextra-7.10.jar)
 mvn install:install-file -DgroupId=$GROUP_ID -DartifactId=rlp-lucene-extra -Dversion=$VER -Dfile=$FILE -Dpackaging=jar -DgeneratePom=true
