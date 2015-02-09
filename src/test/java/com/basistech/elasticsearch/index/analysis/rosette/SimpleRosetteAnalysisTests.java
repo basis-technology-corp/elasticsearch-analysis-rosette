@@ -28,8 +28,12 @@ package com.basistech.elasticsearch.index.analysis.rosette;
 import com.basistech.rlp.lucene.RLPAnalyzer;
 import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
+import org.elasticsearch.Version;
+import org.elasticsearch.cluster.metadata.IndexMetaData;
 import org.elasticsearch.common.inject.Injector;
 import org.elasticsearch.common.inject.ModulesBuilder;
+import org.elasticsearch.common.settings.ImmutableSettings;
+import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.common.settings.SettingsModule;
 import org.elasticsearch.env.Environment;
 import org.elasticsearch.env.EnvironmentModule;
@@ -48,8 +52,6 @@ import org.testng.annotations.Test;
 import java.io.IOException;
 import java.io.StringReader;
 
-import static java.lang.System.out;
-import static org.elasticsearch.common.settings.ImmutableSettings.Builder.EMPTY_SETTINGS;
 import static org.hamcrest.Matchers.instanceOf;
 
 /**
@@ -60,12 +62,13 @@ public class SimpleRosetteAnalysisTests {
     private AnalysisService getAnalysisService() {
         Index index = new Index("test");
 
-        Injector parentInjector = new ModulesBuilder().add(new SettingsModule(EMPTY_SETTINGS),
-                new EnvironmentModule(new Environment(EMPTY_SETTINGS)), new IndicesAnalysisModule()).createInjector();
+        Settings settings = ImmutableSettings.settingsBuilder().put(IndexMetaData.SETTING_VERSION_CREATED, Version.CURRENT).build();
+        Injector parentInjector = new ModulesBuilder().add(new SettingsModule(settings),
+                new EnvironmentModule(new Environment(settings)), new IndicesAnalysisModule()).createInjector();
         Injector injector = new ModulesBuilder().add(
-                new IndexSettingsModule(index, EMPTY_SETTINGS),
+                new IndexSettingsModule(index, settings),
                 new IndexNameModule(index),
-                new AnalysisModule(EMPTY_SETTINGS, parentInjector.getInstance(IndicesAnalysisService.class))
+                new AnalysisModule(settings, parentInjector.getInstance(IndicesAnalysisService.class))
                         .addProcessor(new RosetteAnalysisBinderProcessor()))
                 .createChildInjector(parentInjector);
 
