@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.basistech.elasticsearch</groupId>
     <artifactId>elasticsearch-analysis-rosette</artifactId>
-    <version>0.9.1-SNAPSHOT</version>
+    <version>1.0.0-SNAPSHOT</version>
     <packaging>jar</packaging>
     <description>Basis Technology's Rosette analysis plugin for ElasticSearch</description>
     <inceptionYear>2013</inceptionYear>
@@ -22,12 +22,11 @@
     </parent>
 
     <properties>
-        <elasticsearch.version>0.90.3</elasticsearch.version>
-        <elasticsearch.lucene.version>4.3.0</elasticsearch.lucene.version>
-        <basis.common.version>20</basis.common.version>
-        <rlp.rlp.version>7.9.1</rlp.rlp.version>
-        <rlp.lucene.version>7.9.1</rlp.lucene.version>
-        <rlp.save.results.version>10.4</rlp.save.results.version>
+        <elasticsearch.version>1.4.2</elasticsearch.version>
+        <elasticsearch.lucene.version>4.10.2</elasticsearch.lucene.version>
+        <basis.common.version>32</basis.common.version>
+        <rlp.rlp.version>7.12.0</rlp.rlp.version>
+        <rlp.lucene.version>7.12.0</rlp.lucene.version>
     </properties>
 
     <repositories>
