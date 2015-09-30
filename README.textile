@@ -11,21 +11,11 @@ h2. Compatibility
 The following table shows the versions of elasticsearch and Rosette used to build this plugin. 
 
 |_. Rosette Analysis Plugin           |_.  Elasticsearch   |_.  Rosette   |
-| 0.9.0                           | 0.90.3             | 7.9.1      |
+| <tbd>                           | <tbd>             | tbd>      |
 
-h2. Installation
+h2. Building the Plugin
 
-To install the plugin, simply run:
-
-bc. <es.home>/bin/plugin --install analysis-rosette --url http://download.basistech.com/httpFDL/elasticsearch-analysis-rosette/latest
-
-where <code>es.home</code> is the root of your elasticsearch installation.
-
-Using the plugin requires a licensed copy of "Rosette.":http://www.basistech.com/text-analytics/rosette/ The plugin needs to know where to find the Rosette binaries. This is accomplished by creating the file <code><es.home>/config/bt/analysis-rosette-config.yml</code> that contains the single line <code>bt.root: <rosette.home></code>, e.g. <code>bt.root: /opt/rlp_7.9</code>.
-
-h2. Build Dependencies
-
-If you choose to build the plugin from source, note the following dependencies, which are not publicly available.  These are found in the Rosette SDK:
+Building this plugin requires the following dependencies, which are not publicly available.  These are found in the "Rosette.":http://www.basistech.com/text-analytics/rosette/ SDK:
 
     * btrlp.jar
     * btutil.jar
@@ -37,8 +27,22 @@ You can install these into your local maven repository by using the script _mvn-
 
 bc. sh mvn-install-rosette-artifacts.sh <rosette.home>
 
+where <code>rosette.home</code> is the root of your Rosette SDK installation.
+
 Once these dependencies are present in your maven repository, you can build the plugin as shown:
 
 bc. mvn -Dbt.root=<rosette.home> package
 
-Note that <code>-Dbt.root=<rosette.home></code> is required by the unit tests.
+(<code>-Dbt.root=<rosette.home></code> is needed to run the unit tests.)
+
+h2. Installing the Plugin
+
+After building the plugin, you can install it using the Elasticsearch _plugin_ command as follows:
+
+bc. <es.home>/bin/plugin --install analysis-rosette --url file://<path to plugin>
+
+where <code>es.home</code> is the root of your elasticsearch installation.
+        
+You also need to configure the installed plugin to look for the Rosette SDK in the right place. This is accomplished by creating the file <code><es.home>/config/bt/analysis-rosette-config.yml</code> that contains the single line <code>bt.root: <rosette.home></code>, e.g. <code>bt.root: /opt/rlp_7.9</code>.
+
+
